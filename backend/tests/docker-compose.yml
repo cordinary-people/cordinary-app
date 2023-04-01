@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  mysql-db:
+    platform: linux/amd64
+    image: mysql:5.7.37
+    container_name: cordinary-db
+    env_file: .env
+    environment:
+      MYSQL_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PW}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    command: mysqld --sql_mode="ONLY_FULL_GROUP_BY"
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - cordinary_data:/var/lib/mysql
+    networks:
+      netbridge:
+        aliases:
+          - cordinary-mysql
+networks :
+  netbridge:
+    driver: bridge
+
+volumes:
+  cordinary_data:
