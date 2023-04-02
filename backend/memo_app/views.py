@@ -6,3 +6,6 @@ from .serializers import MemoSerializer
 class MemoListCreate(generics.ListCreateAPIView):
     queryset = Memo.objects.all()
     serializer_class = MemoSerializer
+
+
+
